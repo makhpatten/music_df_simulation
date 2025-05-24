@@ -5,7 +5,7 @@ May 12, 2025<br><br>
 
 This is a basic MATLAB script to simulate the MUSIC algorithm to find the direction of signals received by an antenna array.  I wrote it as part of a job interview question to demonstrate a DF algorithm.<br><br>
 
-<h1>Simulation of Received Antenna Array Signals</h1>h1><br><br> 
+<h3>Simulation of Received Antenna Array Signals</h3><br><br> 
 
 Typically, we are simulating the digitally sampled value of the RF signal impinging on each antenna. Since the RF signal will be analog downshifted in a completely linear fashion, using local oscillators that are phase locked among antennas (i.e., each antenna receiver channel uses the same reference oscillator), we don't need to
 simulate at the RF frequency. The downshifted signal will ultimately be sampled using an AD, and then the signal will typically be further digitally downconverted, filtered, and decimated to become the “baseband” signal. Because all these operations have been linear, the phase and amplitude relationships between signal at different antennas has been preserved without distortion. The simulation only needs to generate samples for the signal at this point in the processing where it is at the baseband sample rate. It will be far less than the A/D sample rate, as it only needs the bandwidth to contain the desired signal of interest.
@@ -15,7 +15,7 @@ For each antenna, each transmitter signal vector is phase shifted dependent on i
 guessing that it is desired to use a calibration table based on actual data, so that algorithms are tested with the actual antenna geometry. But a simple simulation using an idealized geometry could consist of an array of antennas, all equally spaced in a straight line. With this antenna geometry, the theoretical relative phase shift is easily calculated from the DoA and the ratio of the antenna spacing to the signal wavelength.<br><br>
 The proposed simulation that I have described above models the received signals added together at each antenna, with no distortion other than the phase shift and additive Gaussian noise. The parameters for the simulation would be the number of antennas, the spacing (relative to wavelength), the number of snapshots desired, the number of simulated transmitted signals, and the DoA and SNR of each transmitted signal. A more complex simulation might include a way to simulate other effects such as correlated multipath interference, non-Gaussian noise, non-linear receiver effects, fixed point arithmetic quantization issues, and perhaps other things that I don't know much about.<br><br>
 
-<h1>Explanation of MUSIC Algorithm<h1><br><br>
+<h3>Explanation of MUSIC Algorithm</h3>h3><br><br>
 
 MUSIC estimates the directions of signals by using eigenvector analysis. The antenna covariance matrix is “decomposed” into its eigenvalue and eigenvector space. The eigenvectors are sorted according to the magnitude of its corresponding eigenvalue. The first eigenvectors in the sorted order, associated with large eigenvalues, are considered to be associated with actual received signals. The ending eigenvectors, associated with the small eigenvalues, are considered to be part of the noisespace.<br><br>
 
